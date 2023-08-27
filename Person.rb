@@ -1,4 +1,6 @@
-class Person
+require './Person.rb'
+
+class Person < Nameable
   attr_accessor :name, :age
   attr_reader :id
 
@@ -6,6 +8,10 @@ class Person
     @id = Random.rand(1..1000)
     @name = name
     @age = age
+  end
+
+  def correct_name
+    @name
   end
 
   private def of_age?
