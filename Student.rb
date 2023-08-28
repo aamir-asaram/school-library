@@ -1,8 +1,8 @@
 require './Person.rb'
 
 class Student < Person
-  def initialize(classroom)
-    super
+  def initialize(parents_permission, classroom)
+    super(name, age)
     @classroom = classroom
   end
 
