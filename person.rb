@@ -1,6 +1,7 @@
 require './nameable'
 
 class Person < Nameable
+
   attr_accessor :name, :age
   attr_reader :id
 
@@ -14,7 +15,7 @@ class Person < Nameable
   def correct_name
     @name
   end
-
+  
   def can_use_services?
     of_age? || @parents_permission
   end
