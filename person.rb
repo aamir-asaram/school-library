@@ -1,4 +1,4 @@
-require './Person.rb'
+require './nameable'
 
 class Person < Nameable
   attr_accessor :name, :age
