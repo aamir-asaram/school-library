@@ -26,8 +26,6 @@ def run_method(option, app)
     app.create_rental
   when 6
     app.list_rentals
-  when 7
-    abort('Exiting...')
   else
     puts 'Invalid option'
   end
