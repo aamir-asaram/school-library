@@ -12,7 +12,7 @@ class App
     @people = []
     @books = []
     @rentals = []
-    @people << Student.new(17, 'Maximilianus', parents_permission:true)
+    @people << Student.new(17, 'Maximilianus', parents_permission: true)
     @people << Student.new(18, 'John', parents_permission: true)
     @books << Book.new('The Lord of the Rings', 'J. R. R. Tolkien')
     @books << Book.new('The Hobbit', 'J. R. R. Tolkien')
@@ -38,7 +38,6 @@ class App
     name = gets.chomp
 
     if person_type == 1
-      classroom = Classroom.new('CS')
       print 'Parents permission? [Y/N] '
       parents_permission = gets.chomp.downcase == 'y'
       student = Student.new(age, name, parents_permission: parents_permission)
