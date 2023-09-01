@@ -43,7 +43,7 @@ class App
       student = Student.new(age, classroom, name, parents_permission)
       @people << student
     elsif person_type == 2
-      print 'Specialization: '
+      puts 'Specialization?'
       specialization = gets.chomp
       teacher = Teacher.new(age, specialization, name)
       @people << teacher
@@ -95,5 +95,4 @@ class App
     end
     puts ''
   end
-
 end
