@@ -12,8 +12,8 @@ class App
     @people = []
     @books = []
     @rentals = []
-    @people << Student.new(17, Classroom.new('CS'), 'Maximilianus', true)
-    @people << Student.new(18, Classroom.new('CS'), 'John', true)
+    @people << Student.new(17, 'Maximilianus', parents_permission:true)
+    @people << Student.new(18, 'John', parents_permission: true)
     @books << Book.new('The Lord of the Rings', 'J. R. R. Tolkien')
     @books << Book.new('The Hobbit', 'J. R. R. Tolkien')
   end
@@ -41,7 +41,7 @@ class App
       classroom = Classroom.new('CS')
       print 'Parents permission? [Y/N] '
       parents_permission = gets.chomp.downcase == 'y'
-      student = Student.new(age, classroom, name, parents_permission)
+      student = Student.new(age, name, parents_permission: parents_permission)
       @people << student
     elsif person_type == 2
       print 'Specialization: '
