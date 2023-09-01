@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 require './person'
 require './student'
 require './classroom'
 require './book'
 require './rental'
-require './classroom'
 require './teacher'
 require './capitalize_decorator'
 require './trimmer_decorator'
@@ -21,7 +22,9 @@ class App
 
   def list_people(index = false)
     if index
-      @people.each_with_index { |person, index| puts "#{index}) [#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+      @people.each_with_index do |person, index|
+        puts "#{index}) [#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      end
     else
       @people.each { |person| puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
     end
@@ -87,13 +90,12 @@ class App
     id = gets.chomp.to_i
     puts 'Rentals:'
     @people.each do |person|
-      if person.id == id
-        person.rentals.each do |rental|
-          puts rental.to_s
-        end
+      next unless person.id == id
+
+      person.rentals.each do |rental|
+        puts rental
       end
     end
     puts ''
   end
-
 end

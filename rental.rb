@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Rental
   attr_accessor :date
 
@@ -10,9 +12,7 @@ class Rental
     person.add_rental(self)
   end
 
-  def person
-    @person
-  end
+  attr_reader :person
 
   def to_s
     "Date: #{@date}, Book: #{@book.title} by #{@book.author}"

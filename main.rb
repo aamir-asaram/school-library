@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './app'
 
 def display_menu
@@ -37,6 +39,4 @@ end
 puts 'Welcome to School Library app!'
 option = display_menu
 app = App.new
-while option != 7
-  option = run_method(option, app)
-end
+option = run_method(option, app) while option != 7

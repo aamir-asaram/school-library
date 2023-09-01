@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './rental'
 
 class Book
@@ -13,11 +15,5 @@ class Book
     @rentals << rental
   end
 
-  def title
-    @title
-  end
-
-  def author
-    @author
-  end
+  attr_reader :title, :author
 end
