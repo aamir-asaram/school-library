@@ -20,17 +20,16 @@ class App
   end
 
   def list_people
-    @people.each do |person|
-      puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
+    @people.each { |person| puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+    puts ''
   end
 
   def create_person
-    puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]'
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     person_type = gets.chomp.to_i
-    puts 'Age?'
+    print 'Age: '
     age = gets.chomp.to_i
-    puts 'Name?'
+    print 'Name: '
     name = gets.chomp
 
     if person_type == 1
@@ -39,7 +38,6 @@ class App
       parents_permission = gets.chomp.downcase == 'y'
       student = Student.new(age, classroom, name, parents_permission)
       @people << student
-      list_people
     elsif person_type == 2
       puts 'Specialization?'
       specialization = gets.chomp
@@ -48,6 +46,19 @@ class App
     else
       puts 'Invalid option'
     end
+  end
+
+  def create_book
+    print 'Title: '
+    title = gets.chomp
+    print 'Author: '
+    author = gets.chomp
+    @books << Book.new(title, author)
+  end
+
+  def list_books
+    @books.each { |book| puts "#{book.title} by #{book.author}" }
+    puts ''
   end
 
 end

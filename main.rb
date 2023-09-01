@@ -15,13 +15,13 @@ end
 def run_method(option, app)
   case option
   when 1
-    puts app.list_books# app.list_books
+    app.list_books
   when 2
     app.list_people
   when 3
     app.create_person
   when 4
-    puts 4# app.create_book
+    app.create_book
   when 5
     puts 5# app.create_rental
   when 6
