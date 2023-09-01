@@ -23,8 +23,16 @@ class Person < Nameable
     of_age? || @parents_permission
   end
 
+  def id
+    @id
+  end
+
   def add_rental(rental)
     @rentals << rental
+  end
+
+  def rentals
+    @rentals
   end
 
   private

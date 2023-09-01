@@ -43,7 +43,7 @@ class App
       student = Student.new(age, classroom, name, parents_permission)
       @people << student
     elsif person_type == 2
-      puts 'Specialization?'
+      print 'Specialization: '
       specialization = gets.chomp
       teacher = Teacher.new(age, specialization, name)
       @people << teacher
@@ -80,6 +80,20 @@ class App
     date = gets.chomp
     @rentals << Rental.new(date, @books[book_index], @people[person_index])
     puts 'Rental created successfully'
+  end
+
+  def list_rentals
+    print 'ID of person: '
+    id = gets.chomp.to_i
+    puts 'Rentals:'
+    @people.each do |person|
+      if person.id == id
+        person.rentals.each do |rental|
+          puts rental.to_s
+        end
+      end
+    end
+    puts ''
   end
 
 end
