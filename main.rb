@@ -23,9 +23,9 @@ def run_method(option, app)
   when 4
     app.create_book
   when 5
-    puts 5# app.create_rental
+    app.create_rental
   when 6
-    puts 6 # app.list_rentals
+    app.list_rentals
   when 7
     abort('Exiting...')
   else
