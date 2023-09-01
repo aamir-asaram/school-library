@@ -4,9 +4,9 @@ require './trimmer_decorator'
 
 class Person < Nameable
   attr_accessor :name, :age
-  attr_reader :id, :rentals
+  attr_reader :id
 
-  def initialize(age = nil, name = 'Unknown', parents_permission: true)
+  def initialize(age = nil, name = 'Unknown', parents_permission= true)
     super()
     @id = Random.rand(1..1000)
     @name = name
@@ -23,8 +23,16 @@ class Person < Nameable
     of_age? || @parents_permission
   end
 
+  def id
+    @id
+  end
+
   def add_rental(rental)
     @rentals << rental
+  end
+
+  def rentals
+    @rentals
   end
 
   private

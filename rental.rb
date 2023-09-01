@@ -1,6 +1,5 @@
 class Rental
   attr_accessor :date
-  attr_reader :person
 
   def initialize(date, book, person)
     @date = date
@@ -15,7 +14,7 @@ class Rental
     @person
   end
 
-  def print_rental
+  def to_s
     "Date: #{@date}, Book: #{@book.title} by #{@book.author}"
   end
 end
