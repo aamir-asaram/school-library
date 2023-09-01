@@ -26,8 +26,6 @@ def run_method(option, app)
     app.create_rental
   when 6
     app.list_rentals
-  when 7
-    abort('Exiting...')
   else
     puts 'Invalid option'
   end
@@ -37,6 +35,4 @@ end
 puts 'Welcome to School Library app!'
 option = display_menu
 app = App.new
-while option != 7
-  option = run_method(option, app)
-end
+option = run_method(option, app) while option != 7

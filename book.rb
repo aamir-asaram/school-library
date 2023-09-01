@@ -12,12 +12,4 @@ class Book
   def add_rental(rental)
     @rentals << rental
   end
-
-  def title
-    @title
-  end
-
-  def author
-    @author
-  end
 end

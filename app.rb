@@ -3,7 +3,6 @@ require './student'
 require './classroom'
 require './book'
 require './rental'
-require './classroom'
 require './teacher'
 require './capitalize_decorator'
 require './trimmer_decorator'
@@ -19,9 +18,10 @@ class App
     @books << Book.new('The Hobbit', 'J. R. R. Tolkien')
   end
 
-  def list_people(index = false)
+  def list_people(index: false)
     if index
-      @people.each_with_index { |person, index| puts "#{index}) [#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+      @people.each_with_index { |person, index| puts "#{index}) [#{person.class.name}] Name: #{person.name},
+      ID: #{person.id}, Age: #{person.age}" }
     else
       @people.each { |person| puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
     end
@@ -60,7 +60,7 @@ class App
     @books << Book.new(title, author)
   end
 
-  def list_books(index = false)
+  def list_books(index: false)
     if index
       @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
     else
@@ -87,9 +87,9 @@ class App
     id = gets.chomp.to_i
     puts 'Rentals:'
     @people.each do |person|
-      if person.id == id
+      next unless person.id == id
         person.rentals.each do |rental|
-          puts rental.to_s
+          puts rental.print_rental
         end
       end
     end
