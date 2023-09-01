@@ -18,7 +18,7 @@ class App
     @books << Book.new('The Hobbit', 'J. R. R. Tolkien')
   end
 
-  def list_people(index = false)
+  def list_people(index: false)
     if index
       @people.each_with_index do |person, index|
         puts "#{index}) [#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
@@ -61,7 +61,7 @@ class App
     @books << Book.new(title, author)
   end
 
-  def list_books(index = false)
+  def list_books(index: false)
     if index
       @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
     else
