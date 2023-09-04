@@ -29,9 +29,7 @@ class App
     puts ''
   end
 
-  def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    person_type = gets.chomp.to_i
+  def create_person(person_type)
     print 'Age: '
     age = gets.chomp.to_i
     print 'Name: '
@@ -88,7 +86,6 @@ class App
     puts 'Rentals:'
     @people.each do |person|
       next unless person.id == id
-
       person.rentals.each do |rental|
         puts rental
       end
