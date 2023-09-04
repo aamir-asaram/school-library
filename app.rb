@@ -86,6 +86,7 @@ class App
     puts 'Rentals:'
     @people.each do |person|
       next unless person.id == id
+
       person.rentals.each do |rental|
         puts rental
       end
