@@ -27,7 +27,9 @@ def run_method(option, app)
   when 5
     app.create_rental
   when 6
-    app.list_rentals
+    print 'ID of person: '
+    id = gets.chomp.to_i
+    app.list_rentals(id)
   else
     puts 'Invalid option'
   end
@@ -39,3 +41,4 @@ option = display_menu
 app = App.new
 option = run_method(option, app) while option != 7
 puts 'Thanks for using the School Library app!'
+app.write_to_file

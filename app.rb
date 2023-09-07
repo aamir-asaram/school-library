@@ -6,27 +6,81 @@ require './rental'
 require './teacher'
 require './capitalize_decorator'
 require './trimmer_decorator'
+require 'json'
 
 class App
   def initialize
     @people = []
+    if File.exist?('people.json') && File.size('people.json') > 0
+      JSON.parse(File.read('people.json')).each do |person|
+        if person['type'] == 'Student'
+          student = Student.new(person['age'], person['name'], parents_permission: person['parents_permission'])
+          student.instance_variable_set(:@id, person['id'])
+          @people << student
+        elsif person['type'] == 'Teacher'
+          teacher = Teacher.new(person['age'], person['specialization'], person['name'])
+          teacher.instance_variable_set(:@id, person['id'])
+          @people << teacher
+        end
+      end
+    end
     @books = []
+    if File.exist?('books.json') && File.size('books.json') > 0
+      JSON.parse(File.read('books.json')).each do |book|
+        @books << Book.new(book['title'], book['author'])
+      end
+    end
     @rentals = []
-    @people << Student.new(17, 'Maximilianus', parents_permission: true)
-    @people << Student.new(18, 'John', parents_permission: true)
-    @books << Book.new('The Lord of the Rings', 'J. R. R. Tolkien')
-    @books << Book.new('The Hobbit', 'J. R. R. Tolkien')
+    if File.exist?('rentals.json') && File.size('rentals.json') > 0
+      JSON.parse(File.read('rentals.json')).each do |rental|
+        book = @books.find { |book| book.title == rental['book']['title'] }
+        person = @people.find { |person| person.id == rental['person']['id'] }
+        @rentals << Rental.new(rental['date'], book, person )
+      end
+    end
   end
 
   def list_people(index: false)
-    if index
-      @people.each_with_index do |person, index|
-        puts "#{index}) [#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    @people.each_with_index do |person, idx|
+      print "#{idx + 1} - " if index
+      if person.class == Student
+        print "[#{person.class}] Name: #{person.name}, Age: #{person.age}, ID: #{person.id}, Index: #{index}, Parents permission: #{person.parents_permission}\n"
+      elsif person.class == Teacher
+        print "[#{person.class}] Name: #{person.name}, Age: #{person.age}, ID: #{person.id}, Index: #{index}, Specialization: #{person.specialization}\n"
       end
-    else
-      @people.each { |person| puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
     end
     puts ''
+  end
+
+  def write_to_file
+    people = []
+    File.open('people.json', 'w') do |file|
+      @people.each do |person|
+        if person.class == Student
+          hash = {type: 'Student', age: person.age, name: person.name, parents_permission: person.parents_permission, id: person.id}
+        elsif person.class == Teacher
+          hash = {type: 'Teacher', age: person.age, name: person.name, specialization: person.specialization, id: person.id}
+        end
+        people.push(hash)
+      end
+      file.write(people.to_json)
+    end
+    books = []
+    File.open('books.json', 'w') do |file|
+      @books.each do |book|
+        hash = {title: book.title, author: book.author}
+        books.push(hash)
+      end
+      file.write(books.to_json)
+    end
+    rentals = []
+    File.open('rentals.json', 'w') do |file|
+      @rentals.each do |rental|
+        hash = {date: rental.date, person: {name: rental.person.name, id: rental.person.id}, book: {title: rental.book.title, author: rental.book.author}}
+        rentals.push(hash)
+      end
+      file.write(rentals.to_json)
+    end
   end
 
   def create_person(person_type)
@@ -59,10 +113,9 @@ class App
   end
 
   def list_books(index: false)
-    if index
-      @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
-    else
-      @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+    @books.each_with_index do |book, idx|
+      print "#{idx + 1} - " if index
+      print "Title: #{book.title}, Author: #{book.author}\n"
     end
     puts ''
   end
@@ -80,9 +133,7 @@ class App
     puts 'Rental created successfully'
   end
 
-  def list_rentals
-    print 'ID of person: '
-    id = gets.chomp.to_i
+  def list_rentals(id)
     puts 'Rentals:'
     @people.each do |person|
       next unless person.id == id
