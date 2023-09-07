@@ -19,7 +19,9 @@ def run_method(option, app)
   when 2
     app.list_people
   when 3
-    app.create_person
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+    person_type = gets.chomp.to_i
+    app.create_person(person_type)
   when 4
     app.create_book
   when 5
@@ -36,3 +38,4 @@ puts 'Welcome to School Library app!'
 option = display_menu
 app = App.new
 option = run_method(option, app) while option != 7
+puts 'Thanks for using the School Library app!'
